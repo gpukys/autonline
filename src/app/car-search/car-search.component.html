@@ -1,0 +1,99 @@
+<div *ngIf="!gotCars()" class="container">
+  <h2>Automobilių paieška</h2>
+  <hr>
+  <div class="input-group">
+      <mat-form-field>
+          <input type="text" placeholder="Gamintojas" (blur)="onBrandChange($event)" aria-label="Brand" matInput [formControl]="formGroup.controls.brandControl"
+            [matAutocomplete]="brand">
+        </mat-form-field>
+        
+        <mat-form-field>
+          <input type="text" placeholder="Modelis" (blur)="onModelChange($event)" aria-label="Modelis" matInput [formControl]="formGroup.controls.modelControl"
+            [matAutocomplete]="model">
+        </mat-form-field>
+  </div>
+  <div class="input-group"><mat-form-field>
+      <mat-select placeholder="Pagaminimo metai nuo" [(ngModel)]="yearInterval.from">
+        <mat-option *ngFor="let year of yearArray" [value]="year">
+          {{year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-select placeholder="Pagaminimo metai iki" [(ngModel)]="yearInterval.to">
+        <mat-option *ngFor="let year of yearArray" [value]="year">
+          {{year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field></div>
+  <div class="input-group"><mat-form-field>
+      <mat-select placeholder="Transmisija" [(ngModel)]="carWrapper.transmissionType">
+        <mat-option *ngFor="let type of transmissionTypes" [value]="type.id">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-select placeholder="Kuro tipas" [(ngModel)]="carWrapper.fuelType">
+        <mat-option *ngFor="let type of fuelTypes" [value]="type.id">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-select placeholder="Kėbulo tipas" [(ngModel)]="carWrapper.chassisType">
+        <mat-option *ngFor="let type of chassisTypes" [value]="type.id">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field></div>
+  <button class="btn btn-primary" (click)="submitFindQuery()">Ieškoti</button>
+  
+  
+  <mat-autocomplete #brand="matAutocomplete">
+    <mat-option *ngFor="let brand of filteredBrands | async" [value]="brand.brand">{{brand.brand}}</mat-option>
+  </mat-autocomplete>
+  
+  <mat-autocomplete #model="matAutocomplete">
+    <span *ngIf="selectedBrand">
+      <mat-option *ngFor="let models of filteredModels | async" [value]="models">{{models}}</mat-option>
+    </span>
+  </mat-autocomplete>
+</div>
+
+<div *ngIf="gotCars()">
+  <div class="foundHeader">
+    <h2>Paieškos rezultatai:</h2>
+    <button class="btn btn-primary" (click)="goBack()">Grįžti į paiešką</button>
+  </div>
+  <hr>
+  <div class="search-results">
+    <a *ngFor="let car of carList" class="result" routerLink="/car/{{car._id}}">
+    <div class="image" [ngStyle]="{'background-image': 'url(' + car.picture ? car.picture : '../../assets/image/no-image.png' + ')'}"></div>
+      <div class="content">
+        <div class="info1">
+          <span class="name">{{car.brand}} {{car.model}}</span>
+          <span class="price">{{car.price}} {{car.price? 'eurų':''}}</span>
+        </div>
+      <div class="info">
+        <span>{{car.year}}</span>
+        <span class="transmission" *ngIf="transmissionTypes && car.transmissionType >= 0">Transmisija: {{getNameById(transmissionTypes, car.transmissionType)}}</span>
+        <span class="fuel" *ngIf="fuelTypes && car.fuelType >= 0">Kuro tipas: {{getNameById(fuelTypes, car.fuelType)}}</span>
+        <span class="body" *ngIf="chassisTypes && car.chassisType >= 0">Kėbulo tipas: {{getNameById(chassisTypes, car.chassisType)}}</span>
+      </div>
+      
+    </div>
+  </a>
+</div>
+
+
+
+
+
+
+
+
+

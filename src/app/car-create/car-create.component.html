@@ -1,0 +1,85 @@
+<div class="container">
+  <h2>Pridėti skelbimą</h2>
+  <hr>
+  <div class="input-group">
+      <mat-form-field>
+          <input type="text" placeholder="Gamintojas" (blur)="onBrandChange($event)" aria-label="Brand" matInput [formControl]="formGroup.controls.brandControl"
+            [matAutocomplete]="brand">
+        </mat-form-field>
+        
+        <mat-form-field>
+          <input type="text" placeholder="Modelis" (blur)="onModelChange($event)" aria-label="Modelis" matInput [formControl]="formGroup.controls.modelControl"
+            [matAutocomplete]="model">
+        </mat-form-field>
+  </div>
+  <div class="input-group">
+    <mat-form-field>
+      <mat-select placeholder="Pagaminimo metai" [(ngModel)]="carWrapper.year">
+        <mat-option *ngFor="let year of yearArray" [value]="year">
+          {{year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+  <div class="input-group"><mat-form-field>
+      <mat-select placeholder="Transmisija" [(ngModel)]="carWrapper.transmissionType">
+        <mat-option *ngFor="let type of transmissionTypes" [value]="type.id">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-select placeholder="Kuro tipas" [(ngModel)]="carWrapper.fuelType">
+        <mat-option *ngFor="let type of fuelTypes" [value]="type.id">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-select placeholder="Kėbulo tipas" [(ngModel)]="carWrapper.chassisType">
+        <mat-option *ngFor="let type of chassisTypes" [value]="type.id">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+    <mat-form-field>
+        <input matInput placeholder="Kaina" [(ngModel)]="carWrapper.price">
+      </mat-form-field>
+
+      <mat-form-field>
+          <input matInput placeholder="Telefonas" [(ngModel)]="carWrapper.telephone">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Miestas" [(ngModel)]="carWrapper.city">
+          </mat-form-field>
+
+      <mat-form-field>
+          <textarea matInput placeholder="Komentaras" [(ngModel)]="carWrapper.description"></textarea>
+        </mat-form-field>
+
+  <button class="btn btn-primary" (click)="submitQuery()">Pridėti</button>
+  
+  <mat-autocomplete #brand="matAutocomplete">
+    <mat-option *ngFor="let brand of filteredBrands | async" [value]="brand.brand">{{brand.brand}}</mat-option>
+  </mat-autocomplete>
+  
+  <mat-autocomplete #model="matAutocomplete">
+    <span *ngIf="selectedBrand">
+      <mat-option *ngFor="let models of filteredModels | async" [value]="models">{{models}}</mat-option>
+    </span>
+  </mat-autocomplete>
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+h2 {
+    margin: 0;
+}
+button {
+    width: 150px;
+}
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 1px solid #cecece;
+}
+.container {
+    border: 1px solid #cecece;
+    border-radius: 20px;
+    -webkit-box-shadow: 18px 18px 19px -11px rgba(209,209,209,1);
+    -moz-box-shadow: 18px 18px 19px -11px rgba(209,209,209,1);
+    box-shadow: 18px 18px 19px -11px rgba(209,209,209,1);
+    padding: 20px;
+}
+.image {
+    background-image: url('../../assets/image/no-image.png');
+    height: 128px;
+    background-size: contain;
+    width: 250px;
+    background-repeat: round;
+}
+.content {
+    padding-left: 20px;
+    width: calc(100% - 250px);
+    border-left: 1px solid #cecece;
+    padding-right: 20px;
+}
+.content:hover {
+    background-color: #cecece;
+}
+.result {
+    height: 130px;
+    border: 1px solid #cecece;
+    display: flex;
+}
+.name, .price {
+    color: #039e15;
+    font-size: 28px;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+}
+.info1 {
+    display: flex;
+    justify-content: space-between;
+}
+::ng-deep .mat-form-field-wrapper {
+    margin-right: 20px;
+}
+.foundHeader {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,18 @@
+.content3 {
+    display: flex;
+}
+.picture3{
+    height: 200px;
+    width: 250px;
+    background-image: url('../../assets/image/no-image.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.info8 {
+    width: calc(100% - 250px);
+    font-size: 20px;
+}
+.header3 {
+    display: flex;
+    justify-content: space-between;
+}
